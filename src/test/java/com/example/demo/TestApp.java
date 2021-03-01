@@ -6,6 +6,10 @@ import org.junit.Test;
 
 public class TestApp {
 
+	/*
+	 * This method tests Sayname  
+	 */
+	
 	@Test
 	public void testSayname() {
 		Sayname say = new Sayname();
