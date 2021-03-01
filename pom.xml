@@ -22,12 +22,22 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency> -->
+		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <scope>test</scope>
 		</dependency>
+		
 	</dependencies>
+	
+	
 
 	<build>
 		<plugins>
@@ -36,14 +46,14 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
-			<plugin>
+			<!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <forkCount>0</forkCount>
-                    <!-- <forkMode>once</forkMode> -->
+                    <forkMode>once</forkMode>
                 </configuration>
-            </plugin>
+            </plugin> -->
             
 			<plugin>
         		<groupId>org.jacoco</groupId>
@@ -51,9 +61,15 @@
 		        <version>0.8.2</version>
 		        <executions>
 		            <execution>
+		            	<id>pre-unit-test</id>
 		                <goals>
 		                    <goal>prepare-agent</goal>
 		                </goals>
+		                <!-- https://www.petrikainulainen.net/programming/maven/creating-code-coverage-reports-for-unit-and-integration-tests-with-the-jacoco-maven-plugin/ -->
+		                <configuration>
+		                	<!-- Sets the path to the file which contains the execution data. -->
+		                	<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+		                </configuration>
 		            </execution>
 		            <!-- attached to Maven test phase -->
 		            <execution>
@@ -62,6 +78,13 @@
 		                <goals>
 		                    <goal>report</goal>
 		                </goals>
+		                <configuration>
+				                <!-- Sets the path to the file which contains the execution data. -->
+				                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+				                <!-- Sets the output directory for the code coverage report. -->
+				                <!-- <outputDirectory>${project.reporting.outputDirectory}/coverage-reports/jacoco-ut</outputDirectory> -->
+				                <outputDirectory>${project.build.directory}/coverage-reports/jacoco-ut</outputDirectory>
+				            </configuration>
 		            </execution>
 		        </executions>
     		</plugin>
